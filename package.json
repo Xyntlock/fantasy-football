@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "format": "biome format ./src ./amplify",
     "format-write": "biome format --write ./src ./amplify",
-    "lint": "biome lint ./src",
+    "lint": "biome lint ./src ./amplify",
     "preview": "vite preview"
   },
   "dependencies": {
