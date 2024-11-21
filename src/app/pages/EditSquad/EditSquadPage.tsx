@@ -1,3 +1,3 @@
-const EditSquadPage = () => <div>Home Page</div>
+const EditSquadPage = () => <div>Edit Squad Page</div>
 
 export default EditSquadPage
