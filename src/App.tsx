@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import type { Schema } from '../amplify/data/resource'
-import { generateClient } from 'aws-amplify/data'
 import { Button, DarkThemeToggle, Flowbite, ListGroup } from 'flowbite-react'
+import { generateClient } from 'aws-amplify/api'
 
 const client = generateClient<Schema>()
 
-function App() {
+const App = () => {
   const [todos, setTodos] = useState<Array<Schema['Todo']['type']>>([])
 
   useEffect(() => {
