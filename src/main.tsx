@@ -12,12 +12,14 @@ Amplify.configure(outputs)
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<HomePage />} />
-        <Route path="/app" element={<App />} />
-        <Route path="/login" element={<Authenticator />} />
-      </Routes>
-    </BrowserRouter>
+    <Authenticator>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<HomePage />} />
+          <Route path="/app" element={<App />} />
+          <Route path="/login" element={<Authenticator />} />
+        </Routes>
+      </BrowserRouter>
+    </Authenticator>
   </React.StrictMode>
 )
