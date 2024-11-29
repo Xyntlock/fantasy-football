@@ -7,5 +7,5 @@ module.exports = {
     extend: {},
   },
   plugins: [flowbite.plugin()],
-  darkMode: 'class',
+  darkMode: 'selector',
 }

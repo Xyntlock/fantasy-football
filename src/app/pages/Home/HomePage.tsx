@@ -1,5 +1,6 @@
 import { signOut } from 'aws-amplify/auth'
 import { Button } from 'flowbite-react'
+import Page from '../Page'
 
 const HomePage = () => {
   const handleClick = () => {
@@ -7,12 +8,12 @@ const HomePage = () => {
   }
 
   return (
-    <div>
+    <Page>
       Home Page
       <Button pill onClick={handleClick}>
         Sign Out
       </Button>
-    </div>
+    </Page>
   )
 }
 

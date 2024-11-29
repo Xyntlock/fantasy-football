@@ -1,3 +1,5 @@
-const ViewSquadPage = () => <div>View Squad Page</div>
+import Page from '../Page'
+
+const ViewSquadPage = () => <Page>View Squad Page</Page>
 
 export default ViewSquadPage
