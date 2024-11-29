@@ -28,7 +28,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="/view-squad" element={<ViewSquadPage />} />
             <Route path="/leaderboard" element={<LeaderboardPage />} />
             <Route path="/versus" element={<VersusPage />} />
-            <Route path="/app" element={<App />} />
           </Routes>
         </BrowserRouter>
       </Authenticator>
