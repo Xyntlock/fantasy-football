@@ -7,9 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "build:styles": "npx tailwindcss -i ./src/index.css -o ./dist/output.css",
-    "format": "biome format ./src ./amplify",
-    "format:write": "biome format --write ./src ./amplify",
-    "lint": "biome lint ./src ./amplify",
+    "lint": "biome check ./src ./amplify",
+    "lint:write": "biome check --write ./src ./amplify",
     "preview": "vite preview"
   },
   "dependencies": {
