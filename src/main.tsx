@@ -7,18 +7,12 @@ import outputs from '../amplify_outputs.json'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import HomePage from './app/pages/Home/HomePage.tsx'
 import { Authenticator } from '@aws-amplify/ui-react'
-import {
-  DarkThemeToggle,
-  Flowbite,
-  Navbar,
-  NavbarCollapse,
-  NavbarLink,
-  NavbarToggle,
-} from 'flowbite-react'
+import { Flowbite } from 'flowbite-react'
 import EditSquadPage from './app/pages/EditSquad/EditSquadPage.tsx'
 import LeaderboardPage from './app/pages/Leaderboard/LeaderboardPage.tsx'
 import VersusPage from './app/pages/Versus/VersusPage.tsx'
 import ViewSquadPage from './app/pages/ViewSquad/ViewSquadPage.tsx'
+import { Navbar } from './app/components/Navbar/Navbar.tsx'
 
 Amplify.configure(outputs)
 
@@ -26,17 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <Flowbite>
     <React.StrictMode>
       <Authenticator>
-        <Navbar fluid>
-          <NavbarToggle />
-          <NavbarCollapse>
-            <NavbarLink href="/">Home</NavbarLink>
-            <NavbarLink href="/edit-squad">Edit Squad</NavbarLink>
-            <NavbarLink href="/view-squad">View Squad</NavbarLink>
-            <NavbarLink href="/leaderboard">Leaderboard</NavbarLink>
-            <NavbarLink href="/versus">Versus</NavbarLink>
-          </NavbarCollapse>
-          <DarkThemeToggle />
-        </Navbar>
+        <Navbar />
         <BrowserRouter>
           <Routes>
             <Route index element={<HomePage />} />
