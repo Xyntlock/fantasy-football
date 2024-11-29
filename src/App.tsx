@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import type { Schema } from '../amplify/data/resource'
 import { Button, DarkThemeToggle, Flowbite, ListGroup } from 'flowbite-react'
 import { generateClient } from 'aws-amplify/api'
+import { signOut } from 'aws-amplify/auth'
+import '@aws-amplify/ui-react/styles.css'
 
 const client = generateClient<Schema>()
 
@@ -16,6 +18,10 @@ const App = () => {
 
   function createTodo() {
     client.models.Todo.create({ content: window.prompt('Todo content') })
+  }
+
+  const handleClick = () => {
+    signOut()
   }
 
   return (
@@ -39,6 +45,7 @@ const App = () => {
         </div>
         <DarkThemeToggle />
       </Flowbite>
+      <Button onClick={handleClick}>Sign Out</Button>
     </main>
   )
 }
