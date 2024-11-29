@@ -5,7 +5,7 @@ interface PageProps {
 }
 
 const Page = ({ children }: PageProps) => (
-  <div className="mx-16">{children}</div>
+  <div className="mx-8 mt-4">{children}</div>
 )
 
 export default Page
