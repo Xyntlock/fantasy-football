@@ -1,5 +1,5 @@
-import type { AllHTMLAttributes, ComponentProps, ReactNode } from 'react'
 import { Button as FlowbiteButton } from 'flowbite-react'
+import type { AllHTMLAttributes, ComponentProps, ReactNode } from 'react'
 import * as Styled from './Button.styles'
 
 type NativeButtonProps = AllHTMLAttributes<HTMLButtonElement>

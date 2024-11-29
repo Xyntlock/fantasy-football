@@ -1,3 +1,4 @@
+import { signOut } from 'aws-amplify/auth'
 import {
   DarkThemeToggle,
   Navbar as FlowbiteNavbar,
@@ -6,7 +7,6 @@ import {
   NavbarToggle,
 } from 'flowbite-react'
 import { Button } from '../Button/Button'
-import { signOut } from 'aws-amplify/auth'
 
 export const Navbar = () => {
   const handleClick = () => {

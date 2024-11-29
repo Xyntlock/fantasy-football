@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
-import type { Schema } from '../amplify/data/resource'
-import { Button, DarkThemeToggle, Flowbite, ListGroup } from 'flowbite-react'
 import { generateClient } from 'aws-amplify/api'
 import { signOut } from 'aws-amplify/auth'
+import { Button, DarkThemeToggle, Flowbite, ListGroup } from 'flowbite-react'
+import { useEffect, useState } from 'react'
+import type { Schema } from '../amplify/data/resource'
 import '@aws-amplify/ui-react/styles.css'
 
 const client = generateClient<Schema>()
