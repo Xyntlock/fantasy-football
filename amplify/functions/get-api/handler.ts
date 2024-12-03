@@ -6,6 +6,6 @@ export const handler: Schema['getApi']['functionHandler'] = async (
   context
 ) => {
   // your function code goes here
-
+  console.log(event)
   return 'Hello, World!'
 }
