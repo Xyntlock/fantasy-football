@@ -5,9 +5,11 @@ import Page from '../Page'
 const client = generateClient<Schema>()
 
 const HomePage = () => {
-  client.queries.getApi({
+  const value = client.queries.getApi({
     name: 'Test',
   })
+
+  console.log(value)
 
   return <Page>Home Page</Page>
 }
