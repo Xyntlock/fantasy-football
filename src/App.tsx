@@ -8,6 +8,9 @@ const client = generateClient<Schema>()
 
 const App = () => {
   const [todos, setTodos] = useState<Array<Schema['Todo']['type']>>([])
+  client.queries.getApi({
+    name: 'Test',
+  })
 
   useEffect(() => {
     client.models.Todo.observeQuery().subscribe({
