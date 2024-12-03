@@ -9,5 +9,4 @@ export const auth = defineAuth({
   loginWith: {
     email: true,
   },
-  access: (allow) => [allow.resource(getApi).to([])],
 })

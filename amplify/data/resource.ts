@@ -16,6 +16,7 @@ const schema = a.schema({
 
   getApi: a
     .query()
+    .authorization((allow) => [allow.publicApiKey()])
     .arguments({
       name: a.string(),
     })
