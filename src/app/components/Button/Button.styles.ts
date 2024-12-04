@@ -12,7 +12,8 @@ const buttonVariants = cva(['flex', 'flex-wrap', 'gap-2'], {
     },
     'margin-x': {
       none: ['mx-0'],
-      sm: ['mx-1'],
+      xs: ['mx-1'],
+      sm: ['mx-2'],
     },
     'margin-y': {
       none: ['my-0'],
