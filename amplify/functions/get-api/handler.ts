@@ -3,7 +3,7 @@ import { secret } from '@aws-amplify/backend'
 import type { Schema } from '../../data/resource'
 
 const options: https.RequestOptions = {
-  hostname: 'https://v3.football.api-sports.io/football',
+  hostname: 'https://v3.football.api-sports.io',
   path: '/leagues',
   method: 'GET',
   headers: {
