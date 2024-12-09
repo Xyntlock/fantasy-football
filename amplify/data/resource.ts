@@ -20,7 +20,7 @@ const schema = a.schema({
     .arguments({
       name: a.string(),
     })
-    .returns(a.string())
+    .returns(a.json())
     .handler(a.handler.function(getApi)),
 })
 
