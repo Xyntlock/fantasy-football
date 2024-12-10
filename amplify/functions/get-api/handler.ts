@@ -1,4 +1,4 @@
-import https from 'node:https'
+import https from 'https'
 import type { Schema } from '../../data/resource'
 
 const options: https.RequestOptions = {
