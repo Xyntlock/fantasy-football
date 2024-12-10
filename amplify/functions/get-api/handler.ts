@@ -1,13 +1,13 @@
 import https from 'https'
+import { secret } from '@aws-amplify/backend'
 import type { Schema } from '../../data/resource'
 
 const options: https.RequestOptions = {
-  hostname: 'https://v3.football.api-sports.io',
-  path: '/leagues',
+  hostname: 'https://v3.football.api-sports.io/leagues',
   method: 'GET',
   headers: {
     // biome-ignore lint/suspicious/noExplicitAny: Amplify manages the replacement of this value
-    'x-rapidapi-key': '0fbaddfaf82f459029be807e29c6db4a',
+    'x-rapidapi-key': secret('football-api-key') as any,
     'x-rapidapi-host': 'v3.football.api-sports.io',
   },
 }
