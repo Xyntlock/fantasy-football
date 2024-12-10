@@ -1,5 +1,4 @@
 import https from 'node:https'
-import { secret } from '@aws-amplify/backend'
 import type { Schema } from '../../data/resource'
 
 const options: https.RequestOptions = {
@@ -8,7 +7,7 @@ const options: https.RequestOptions = {
   method: 'GET',
   headers: {
     // biome-ignore lint/suspicious/noExplicitAny: Amplify manages the replacement of this value
-    'x-rapidapi-key': secret('football-api-key') as any,
+    'x-rapidapi-key': 'token',
     'x-rapidapi-host': 'v3.football.api-sports.io',
   },
 }
