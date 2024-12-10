@@ -16,18 +16,23 @@ const options: https.RequestOptions = {
 export const handler: Schema['getApi']['functionHandler'] =
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   async (): Promise<any> => {
+    console.log('starting lambda')
+
     return new Promise((resolve, reject) => {
       const req = https.get(options, (res) => {
         let data = ''
-
+        console.log('getting response')
         // A chunk of data has been received.
         res.on('data', (chunk) => {
           data += chunk
         })
 
+        console.log('data', data)
+
         // The whole response has been received.
         res.on('end', () => {
           try {
+            console.log('finished')
             const parsedData = JSON.parse(data)
             resolve(parsedData)
           } catch (error) {
