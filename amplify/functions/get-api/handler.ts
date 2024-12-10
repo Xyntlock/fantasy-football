@@ -7,7 +7,7 @@ const options: https.RequestOptions = {
   method: 'GET',
   headers: {
     // biome-ignore lint/suspicious/noExplicitAny: Amplify manages the replacement of this value
-    'x-rapidapi-key': 'token',
+    'x-rapidapi-key': '0fbaddfaf82f459029be807e29c6db4a',
     'x-rapidapi-host': 'v3.football.api-sports.io',
   },
 }
