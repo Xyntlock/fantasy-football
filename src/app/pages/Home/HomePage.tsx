@@ -12,7 +12,7 @@ const HomePage = () => {
         name: 'Test',
       })
       .then((data) => {
-        console.log(data)
+        console.log(data.data)
       })
   }, [])
 
