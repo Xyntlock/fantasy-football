@@ -3,36 +3,32 @@ import https from 'https'
 import { env } from '$amplify/env/get-api'
 import type { Schema } from '../../data/resource'
 
-const options: https.RequestOptions = {
-  hostname: 'v3.football.api-sports.io',
-  path: '/leagues',
-  method: 'GET',
-  headers: {
-    'x-rapidapi-key': env.API_KEY,
-    'x-rapidapi-host': 'v3.football.api-sports.io',
-  },
-}
-
 export const handler: Schema['getApi']['functionHandler'] =
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   async (): Promise<any> => {
-    console.log('starting lambda')
+    console.log('env', env)
+
+    const options: https.RequestOptions = {
+      hostname: 'v3.football.api-sports.io',
+      path: '/leagues',
+      method: 'GET',
+      headers: {
+        'x-rapidapi-key': env.API_KEY,
+        'x-rapidapi-host': 'v3.football.api-sports.io',
+      },
+    }
 
     return new Promise((resolve, reject) => {
       const req = https.get(options, (res) => {
         let data = ''
-        console.log('getting response')
         // A chunk of data has been received.
         res.on('data', (chunk) => {
           data += chunk
         })
 
-        console.log('data', data)
-
         // The whole response has been received.
         res.on('end', () => {
           try {
-            console.log('finished')
             const parsedData = JSON.parse(data)
             resolve(parsedData)
           } catch (error) {
