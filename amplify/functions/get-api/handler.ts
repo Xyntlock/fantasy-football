@@ -1,13 +1,13 @@
+// biome-ignore lint/style/useNodejsImportProtocol: node:fetch doesn't work in Lambda
 import https from 'https'
-import { secret } from '@aws-amplify/backend'
+import { env } from '$amplify/env/get-api'
 import type { Schema } from '../../data/resource'
 
 const options: https.RequestOptions = {
   hostname: 'https://v3.football.api-sports.io/leagues',
   method: 'GET',
   headers: {
-    // biome-ignore lint/suspicious/noExplicitAny: Amplify manages the replacement of this value
-    'x-rapidapi-key': secret('football-api-key') as any,
+    'x-rapidapi-key': env.API_KEY,
     'x-rapidapi-host': 'v3.football.api-sports.io',
   },
 }
