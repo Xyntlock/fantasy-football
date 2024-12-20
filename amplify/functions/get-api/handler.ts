@@ -4,7 +4,7 @@ import { env } from '$amplify/env/get-api'
 import type { Schema } from '../../data/resource'
 
 const options: https.RequestOptions = {
-  hostname: 'https://v3.football.api-sports.io/leagues',
+  hostname: 'v3.football.api-sports.io/leagues',
   method: 'GET',
   headers: {
     'x-rapidapi-key': env.API_KEY,
