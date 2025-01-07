@@ -10,7 +10,7 @@ export const handler: Schema['getApi']['functionHandler'] =
 
     const options: https.RequestOptions = {
       hostname: 'v3.football.api-sports.io',
-      path: '/teams?id=46&season=2021',
+      path: '/players/squads?team=46',
       method: 'GET',
       headers: {
         'x-rapidapi-key': env.API_KEY,
