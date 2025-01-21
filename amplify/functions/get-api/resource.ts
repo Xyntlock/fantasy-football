@@ -5,6 +5,5 @@ export const getApi = defineFunction({
   entry: './handler.ts',
   environment: {
     API_KEY: secret('football-api-key'),
-    FOO: 'bar',
   },
 })

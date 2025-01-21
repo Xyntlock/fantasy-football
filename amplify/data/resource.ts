@@ -1,5 +1,6 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend'
 import { getApi } from '../functions/get-api/resource'
+import { initSquad } from '../functions/init-squad/resource'
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -7,19 +8,38 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
-const schema = a.schema({
-  Todo: a
-    .model({
-      content: a.string(),
-    })
-    .authorization((allow) => [allow.publicApiKey()]),
+const schema = a
+  .schema({
+    Squads: a
+      .model({
+        accountId: a.string(),
+        gkid: a.string(),
+        lbid: a.string(),
+        lcbid: a.string(),
+        rcbid: a.string(),
+        rbid: a.string(),
+        lmid: a.string(),
+        lcmid: a.string(),
+        rcmid: a.string(),
+        rmid: a.string(),
+        lfid: a.string(),
+        rfid: a.string(),
+      })
+      .authorization((allow) => [allow.publicApiKey()]),
 
-  getApi: a
-    .query()
-    .authorization((allow) => [allow.publicApiKey()])
-    .returns(a.json())
-    .handler(a.handler.function(getApi)),
-})
+    getApi: a
+      .query()
+      .authorization((allow) => [allow.publicApiKey()])
+      .returns(a.json())
+      .handler(a.handler.function(getApi)),
+
+    initSquad: a
+      .mutation()
+      .authorization((allow) => [allow.publicApiKey()])
+      .returns(a.json())
+      .handler(a.handler.function(initSquad)),
+  })
+  .authorization((allow) => [allow.resource(initSquad).to(['mutate', 'query'])])
 
 export type Schema = ClientSchema<typeof schema>
 

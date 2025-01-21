@@ -6,8 +6,6 @@ import type { Schema } from '../../data/resource'
 export const handler: Schema['getApi']['functionHandler'] =
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   async (): Promise<any> => {
-    console.log('env', env)
-
     const options: https.RequestOptions = {
       hostname: 'v3.football.api-sports.io',
       path: '/players/squads?team=46',

@@ -10,7 +10,8 @@
     "lint": "biome check ./src ./amplify",
     "lint:write": "biome check --write ./src ./amplify",
     "preview": "vite preview",
-    "sandbox": "npx ampx sandbox --profile amplify"
+    "sandbox": "npx ampx sandbox --profile amplify",
+    "outputs": "npx ampx generate outputs --profile amplify"
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^6.5.5",
