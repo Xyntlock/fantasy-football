@@ -1,9 +1,10 @@
-// import { generateClient } from 'aws-amplify/api'
-// import type { Schema } from '../../../../amplify/data/resource'
+import { generateClient } from 'aws-amplify/api'
+import { useEffect } from 'react'
+import type { Schema } from '../../../../amplify/data/resource'
 import { PlayerCards } from '../../components/PlayerCard/PlayerCards'
 import Page from '../Page'
 
-// const client = generateClient<Schema>()
+const client = generateClient<Schema>()
 
 const ViewSquadPage = () => {
   const testPlayers = {
@@ -96,6 +97,10 @@ const ViewSquadPage = () => {
       photo: 'https://media.api-sports.io/football/players/136723.png',
     },
   }
+
+  useEffect(() => {
+    client.mutations.initSquad()
+  }, [])
 
   return (
     <Page>
