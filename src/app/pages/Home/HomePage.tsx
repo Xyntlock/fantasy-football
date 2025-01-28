@@ -1,6 +1,9 @@
+import { generateClient } from 'aws-amplify/api'
+import { useEffect } from 'react'
+import type { Schema } from '../../../../amplify/data/resource'
 import Page from '../Page'
 
-// const client = generateClient<Schema>()
+const client = generateClient<Schema>()
 
 const HomePage = () => {
   // const [players, setPlayers] = useState<Array<Player>>(testPlayers)
@@ -14,6 +17,11 @@ const HomePage = () => {
   //     console.log(response.players)
   //   })
   // }, [])
+
+  useEffect(() => {
+    const response = client.models.Squads.get({ id: '1234' })
+    console.log(response)
+  }, [])
 
   return <Page>Home Page</Page>
 }

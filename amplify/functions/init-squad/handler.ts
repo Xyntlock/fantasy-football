@@ -1,4 +1,4 @@
-import { env } from '$amplify/env/initSquad'
+import { env } from '$amplify/env/init-squad'
 import { getAmplifyDataClientConfig } from '@aws-amplify/backend/function/runtime'
 import { Amplify } from 'aws-amplify'
 import { generateClient } from 'aws-amplify/data'
