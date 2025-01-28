@@ -3,6 +3,9 @@ backend:
   phases:
     build:
       commands:
+        - cd amplify
+        - yarn install --frozen-lockfile
+        - cd ../
         - yarn install --frozen-lockfile
         - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
