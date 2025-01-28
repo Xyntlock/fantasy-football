@@ -19,8 +19,9 @@ const HomePage = () => {
   // }, [])
 
   useEffect(() => {
-    const response = client.models.Squads.get({ id: '1234' })
-    console.log(response)
+    client.models.Squads.get({
+      id: '9ce2188c-02fe-4090-9e69-69f048625f60',
+    }).then((res) => console.log(res))
   }, [])
 
   return <Page>Home Page</Page>
