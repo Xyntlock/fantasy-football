@@ -104,18 +104,7 @@ const testPlayers = {
 export const handler: Schema['initSquad']['functionHandler'] = async () => {
   try {
     await client.models.Squads.create({
-      accountId: '1234',
-      gkid: '123',
-      lbid: '124',
-      lcbid: '125',
-      rcbid: '126',
-      rbid: '127',
-      lmid: '128',
-      lcmid: '129',
-      rcmid: '130',
-      rmid: '131',
-      lfid: '132',
-      rfid: '133',
+      pk: '9ce2188c-02fe-4090-9e69-69f048625f60',
     })
 
     return {

@@ -12,19 +12,20 @@ const schema = a
   .schema({
     Squads: a
       .model({
-        accountId: a.string(),
-        gkid: a.string(),
-        lbid: a.string(),
-        lcbid: a.string(),
-        rcbid: a.string(),
-        rbid: a.string(),
-        lmid: a.string(),
-        lcmid: a.string(),
-        rcmid: a.string(),
-        rmid: a.string(),
-        lfid: a.string(),
-        rfid: a.string(),
+        pk: a.string().required(), // player#playerId or userid#userId-squad#squadId-player#playerId
+        
+        // player fields
+        position: a.string(), // goalkeeper, defender, midfielder or attacker for player entry. gk, lcb, rcb etc. for squad entry
+        statistics: a.json(), // player stats json
+        name: a.string(),
+        lastname: a.string(),
+        nationality: a.string(),
+        photo: a.url(),
+        age: a.integer(),
+
+        //squad fields
       })
+      .identifier(['pk'])
       .authorization((allow) => [allow.publicApiKey()]),
 
     getApi: a

@@ -20,7 +20,7 @@ const HomePage = () => {
 
   useEffect(() => {
     client.models.Squads.get({
-      id: '9ce2188c-02fe-4090-9e69-69f048625f60',
+      pk: '1234',
     }).then((res) => console.log(res))
   }, [])
 
