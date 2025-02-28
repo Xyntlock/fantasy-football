@@ -5,9 +5,9 @@ backend:
       commands:
         - corepack enable
         - cd amplify
-        - yarn install --frozen-lockfile
+        - yarn install --immutable
         - cd ../
-        - yarn install --frozen-lockfile
+        - yarn install --immutable
         - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
