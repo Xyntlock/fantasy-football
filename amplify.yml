@@ -3,6 +3,7 @@ backend:
   phases:
     build:
       commands:
+        - corepack enable
         - cd amplify
         - yarn install --frozen-lockfile
         - cd ../
