@@ -13,7 +13,7 @@ const schema = a
     Squads: a
       .model({
         pk: a.string().required(), // player#playerId or userid#userId-squad#squadId-player#playerId
-        
+
         // player fields
         position: a.string(), // goalkeeper, defender, midfielder or attacker for player entry. gk, lcb, rcb etc. for squad entry
         statistics: a.json(), // player stats json
