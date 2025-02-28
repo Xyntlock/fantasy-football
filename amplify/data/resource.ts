@@ -44,6 +44,7 @@ const schema = a
     updatePlayers: a
       .mutation()
       .authorization((allow) => [allow.publicApiKey()])
+      .returns(a.boolean())
       .handler(a.handler.function(updatePlayers)),
   })
   .authorization((allow) => [allow.resource(initSquad).to(['mutate', 'query'])])
