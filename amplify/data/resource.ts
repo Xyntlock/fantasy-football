@@ -1,6 +1,7 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend'
 import { getApi } from '../functions/get-api/resource'
 import { initSquad } from '../functions/init-squad/resource'
+import { updatePlayers } from '../jobs/update-players/resource'
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -39,6 +40,11 @@ const schema = a
       .authorization((allow) => [allow.publicApiKey()])
       .returns(a.json())
       .handler(a.handler.function(initSquad)),
+
+    updatePlayers: a
+      .mutation()
+      .authorization((allow) => [allow.publicApiKey()])
+      .handler(a.handler.function(updatePlayers)),
   })
   .authorization((allow) => [allow.resource(initSquad).to(['mutate', 'query'])])
 
