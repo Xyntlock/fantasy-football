@@ -6,7 +6,7 @@ import { env } from '$amplify/env/get-api'
 export const handler: EventBridgeHandler<
   'Scheduled Event',
   null,
-  boolean
+  unknown
 > = async (event) => {
   const options: https.RequestOptions = {
     hostname: 'v3.football.api-sports.io',
@@ -18,31 +18,34 @@ export const handler: EventBridgeHandler<
     },
   }
 
-  let players: unknown
-  const req = https.get(options, (res) => {
-    let data = ''
-    // A chunk of data has been received.
-    res.on('data', (chunk) => {
-      data += chunk
+  console.log('entered lambda', options)
+
+  return new Promise((resolve, reject) => {
+    const req = https.get(options, (res) => {
+      console.log('beginning data')
+
+      let data = ''
+      // A chunk of data has been received.
+      res.on('data', (chunk) => {
+        data += chunk
+      })
+
+      // The whole response has been received.
+      res.on('end', () => {
+        try {
+          const parsedData = JSON.parse(data)
+          console.log('players', parsedData)
+          resolve(parsedData)
+        } catch (error) {
+          reject(new Error(`Error parsing JSON: ${error}`))
+        }
+      })
     })
 
-    // The whole response has been received.
-    res.on('end', () => {
-      try {
-        const parsedData = JSON.parse(data)
-        players = parsedData
-        console.log('players', players)
-      } catch (error) {
-        throw new Error(`Error parsing JSON: ${error}`)
-      }
+    req.on('error', (error) => {
+      reject(new Error(`Error making request: ${error.message}`))
     })
+
+    req.end()
   })
-
-  req.on('error', (error) => {
-    throw new Error(`Error making request: ${error.message}`)
-  })
-
-  req.end()
-
-  return true
 }
