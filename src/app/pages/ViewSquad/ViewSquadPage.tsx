@@ -1,5 +1,5 @@
 import { generateClient } from 'aws-amplify/api'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import type { Schema } from '../../../../amplify/data/resource'
 import { PlayerCards } from '../../components/PlayerCard/PlayerCards'
 import Page from '../Page'
@@ -98,14 +98,34 @@ const ViewSquadPage = () => {
     },
   }
 
+  const [players, setPlayers] = useState(testPlayers)
+
   useEffect(() => {
-    client.mutations.initSquad()
+    client.models.Squads.list().then((res) => {
+      const mappedPlayers = res.data
+
+      const playerObject = {
+        goalkeeper: mappedPlayers[0],
+        lb: mappedPlayers[1],
+        lcb: mappedPlayers[2],
+        rcb: mappedPlayers[3],
+        rb: mappedPlayers[4],
+        lm: mappedPlayers[5],
+        lcm: mappedPlayers[6],
+        rcm: mappedPlayers[7],
+        rm: mappedPlayers[8],
+        lf: mappedPlayers[9],
+        rf: mappedPlayers[10],
+      }
+
+      setPlayers(playerObject)
+    })
   }, [])
 
   return (
     <Page>
       {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
-      <PlayerCards squad={testPlayers as any} />
+      <PlayerCards squad={players} />
     </Page>
   )
 }

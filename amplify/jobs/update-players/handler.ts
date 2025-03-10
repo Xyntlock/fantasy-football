@@ -94,6 +94,7 @@ export const handler: EventBridgeHandler<
     req.end()
   })
 
+  // TODO check if created / updated
   await Promise.all(
     data.response[0].players.map(async (player) => {
       const mappedPlayer = {
@@ -104,7 +105,7 @@ export const handler: EventBridgeHandler<
         age: player.age,
       }
 
-      return client.models.Squads.update(mappedPlayer)
+      return client.models.Squads.create(mappedPlayer)
     })
   )
 }

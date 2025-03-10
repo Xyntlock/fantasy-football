@@ -8,20 +8,8 @@ const client = generateClient<Schema>()
 const HomePage = () => {
   // const [players, setPlayers] = useState<Array<Player>>(testPlayers)
 
-  // useEffect(() => {
-  //   client.queries.getApi().then((data) => {
-  //     const json = JSON.parse(data.data as string)
-  //     const response = json.response[0]
-
-  //     setPlayers(response.players)
-  //     console.log(response.players)
-  //   })
-  // }, [])
-
   useEffect(() => {
-    client.models.Squads.get({
-      pk: '1234',
-    }).then((res) => console.log(res))
+    client.models.Squads.list().then((res) => console.log(res))
   }, [])
 
   return <Page>Home Page</Page>
