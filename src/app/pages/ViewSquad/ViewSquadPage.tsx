@@ -98,7 +98,8 @@ const ViewSquadPage = () => {
     },
   }
 
-  const [players, setPlayers] = useState(testPlayers)
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  const [players, setPlayers] = useState<any>(testPlayers)
 
   useEffect(() => {
     client.models.Squads.list().then((res) => {

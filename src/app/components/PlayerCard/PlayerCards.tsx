@@ -111,10 +111,9 @@ const testPlayers = {
 }
 
 export const PlayerCards = ({
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   squad = testPlayers as any,
 }: PlayerCardProps) => {
-  console.log(squad)
-
   return (
     <>
       <div className="grid grid-rows-3 gap-4">
