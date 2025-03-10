@@ -47,7 +47,10 @@ const schema = a
       .returns(a.boolean())
       .handler(a.handler.function(updatePlayers)),
   })
-  .authorization((allow) => [allow.resource(initSquad).to(['mutate', 'query'])])
+  .authorization((allow) => [
+    allow.resource(initSquad).to(['mutate', 'query']),
+    allow.resource(updatePlayers).to(['mutate', 'query']),
+  ])
 
 export type Schema = ClientSchema<typeof schema>
 
