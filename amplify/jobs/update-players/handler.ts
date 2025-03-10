@@ -1,9 +1,15 @@
 // biome-ignore lint/style/useNodejsImportProtocol: node:fetch doesn't work in Lambda
 import https from 'https'
 import type { EventBridgeHandler } from 'aws-lambda'
-import { env } from '$amplify/env/get-api'
+import { env } from '$amplify/env/update-players'
 import { generateClient } from 'aws-amplify/api'
 import type { Schema } from '../../data/resource'
+import { getAmplifyDataClientConfig } from '@aws-amplify/backend/function/runtime'
+import { Amplify } from 'aws-amplify'
+
+const { resourceConfig, libraryOptions } = await getAmplifyDataClientConfig(env)
+
+Amplify.configure(resourceConfig, libraryOptions)
 
 const client = generateClient<Schema>()
 
