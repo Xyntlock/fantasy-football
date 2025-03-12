@@ -1,4 +1,7 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend'
+import { getApi } from '../functions/get-api/resource'
+import { initSquad } from '../functions/init-squad/resource'
+import { updatePlayers } from '../jobs/update-players/resource'
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -6,13 +9,48 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
-const schema = a.schema({
-  Todo: a
-    .model({
-      content: a.string(),
-    })
-    .authorization((allow) => [allow.publicApiKey()]),
-})
+const schema = a
+  .schema({
+    Squads: a
+      .model({
+        pk: a.string().required(), // player#playerId or userid#userId-squad#squadId-player#playerId
+
+        // player fields
+        position: a.string(), // goalkeeper, defender, midfielder or attacker for player entry. gk, lcb, rcb etc. for squad entry
+        statistics: a.json(), // player stats json
+        name: a.string(),
+        lastname: a.string(),
+        nationality: a.string(),
+        photo: a.url(),
+        age: a.integer(),
+
+        //squad fields
+      })
+      .identifier(['pk'])
+      .authorization((allow) => [allow.publicApiKey()]),
+
+    getApi: a
+      .query()
+      .authorization((allow) => [allow.publicApiKey()])
+      .returns(a.json())
+      .handler(a.handler.function(getApi)),
+
+    initSquad: a
+      .mutation()
+      .authorization((allow) => [allow.publicApiKey()])
+      .returns(a.json())
+      .handler(a.handler.function(initSquad)),
+
+    updatePlayers: a
+      .mutation()
+      .authorization((allow) => [allow.publicApiKey()])
+      .returns(a.boolean())
+      .handler(a.handler.function(updatePlayers)),
+  })
+  .authorization((allow) => [
+    allow.resource(initSquad).to(['mutate', 'query']),
+    allow.resource(updatePlayers).to(['mutate', 'query']),
+  ])
 
 export type Schema = ClientSchema<typeof schema>
 

@@ -1,4 +1,5 @@
 import { defineAuth } from '@aws-amplify/backend'
+import { getApi } from '../functions/get-api/resource'
 
 /**
  * Define and configure your auth resource
