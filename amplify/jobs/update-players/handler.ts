@@ -94,15 +94,27 @@ export const handler: EventBridgeHandler<
     req.end()
   })
 
-  // TODO check if created / updated
+  // TODO figure out how filtering works to filter only for `player` prefix
+  const existingPlayers = (await client.models.Squads.list()).data
+
   await Promise.all(
     data.response[0].players.map(async (player) => {
+      const pk = `player#${player.id}`
+
       const mappedPlayer = {
-        pk: `player#${player.id}`,
+        pk,
         position: player.position,
         name: player.name,
         photo: player.photo,
         age: player.age,
+      }
+
+      if (
+        existingPlayers.filter(
+          (existingPlayer) => mappedPlayer.pk === existingPlayer.pk
+        ).length > 0
+      ) {
+        return client.models.Squads.update(mappedPlayer)
       }
 
       return client.models.Squads.create(mappedPlayer)
