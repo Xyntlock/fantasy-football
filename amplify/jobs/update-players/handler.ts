@@ -49,7 +49,7 @@ export const handler: EventBridgeHandler<
         weight: player.weight,
         photo: player.photo,
         position: statistics[0].games.position,
-        statistics,
+        statistics: JSON.stringify(statistics),
       }
 
       if (
