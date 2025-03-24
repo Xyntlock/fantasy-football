@@ -15,6 +15,7 @@
     "lint:write": "biome check --write ./src ./amplify",
     "preview": "vite preview",
     "sandbox": "npx ampx sandbox --profile amplify",
+    "sandbox:delete": "npx ampx sandbox delete --profile amplify",
     "outputs": "npx ampx generate outputs --profile amplify"
   },
   "dependencies": {

@@ -7,4 +7,5 @@ export const updatePlayers = defineFunction({
   environment: {
     API_KEY: secret('football-api-key'),
   },
+  timeoutSeconds: 900,
 })
