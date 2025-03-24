@@ -17,8 +17,8 @@ const schema = a
 
         // player fields
         name: a.string(),
-        firstname: a.string(),
-        lastname: a.string(),
+        firstName: a.string(),
+        lastName: a.string(),
         age: a.integer(),
         nationality: a.string(),
         height: a.string(),
