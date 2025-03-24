@@ -40,10 +40,16 @@ export const handler: EventBridgeHandler<
 
       const mappedPlayer = {
         pk,
-        position: statistics[0].games.position,
         name: player.name,
-        photo: player.photo,
+        firstName: player.firstname,
+        lastName: player.lastname,
         age: player.age,
+        nationality: player.nationality,
+        height: player.height,
+        weight: player.weight,
+        photo: player.photo,
+        position: statistics[0].games.position,
+        statistics,
       }
 
       if (

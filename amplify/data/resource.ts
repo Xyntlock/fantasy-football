@@ -16,13 +16,16 @@ const schema = a
         pk: a.string().required(), // player#playerId or userid#userId-squad#squadId-player#playerId
 
         // player fields
+        name: a.string(),
+        firstname: a.string(),
+        lastname: a.string(),
+        age: a.integer(),
+        nationality: a.string(),
+        height: a.string(),
+        weight: a.string(),
+        photo: a.url(),
         position: a.string(), // goalkeeper, defender, midfielder or attacker for player entry. gk, lcb, rcb etc. for squad entry
         statistics: a.json(), // player stats json
-        name: a.string(),
-        lastname: a.string(),
-        nationality: a.string(),
-        photo: a.url(),
-        age: a.integer(),
 
         //squad fields
       })

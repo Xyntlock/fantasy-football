@@ -8,7 +8,7 @@ type RequestArgs = {
 
 export const getOptions = (page = 1) => ({
   hostname: 'v3.football.api-sports.io',
-  path: `/teams?league=39&season=2024&page=${page}`,
+  path: `/players?league=39&season=2024&page=${page}`,
   method: 'GET',
   headers: {
     'x-rapidapi-key': env.API_KEY,
