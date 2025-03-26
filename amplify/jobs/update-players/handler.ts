@@ -4,7 +4,7 @@ import { generateClient } from 'aws-amplify/api'
 import type { Schema } from '../../data/resource'
 import { getAmplifyDataClientConfig } from '@aws-amplify/backend/function/runtime'
 import { Amplify } from 'aws-amplify'
-import { getOptions, request } from './request'
+import { calculatePlayerPrice, getOptions, request } from './helpers'
 import type { GetPlayersResponse } from './types'
 
 const { resourceConfig, libraryOptions } = await getAmplifyDataClientConfig(env)
@@ -50,6 +50,7 @@ export const handler: EventBridgeHandler<
         photo: player.photo,
         position: statistics[0].games.position,
         statistics: JSON.stringify(statistics),
+        price: calculatePlayerPrice({ player, statistics }),
       }
 
       if (

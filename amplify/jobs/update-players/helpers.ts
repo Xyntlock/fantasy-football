@@ -1,6 +1,7 @@
 // biome-ignore lint/style/useNodejsImportProtocol: node:fetch doesn't work in Lambda
 import https from 'https'
 import { env } from '$amplify/env/update-players'
+import type { PlayerInformation } from './types'
 
 type RequestArgs = {
   options: https.RequestOptions
@@ -43,3 +44,20 @@ export const request = ({ options }: RequestArgs) =>
 
     req.end()
   })
+
+export const calculatePlayerPrice = (playerInformation: PlayerInformation) => {
+  const ratings = playerInformation.statistics
+    .map((stat) => stat.games.rating)
+    .filter((rating) => !!rating)
+    .map((rating) => Number.parseFloat(rating as string))
+    .filter((rating) => !Number.isNaN(rating))
+
+  const ratingsSum = ratings.reduce((acc, rating) => acc + rating, 0)
+  const rating = ratings.length > 0 ? ratingsSum / ratings.length : null
+
+  if (rating && rating > 0) {
+    return rating * 1.5
+  }
+
+  return 5.0
+}
