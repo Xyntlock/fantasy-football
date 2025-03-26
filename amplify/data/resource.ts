@@ -26,6 +26,7 @@ const schema = a
         photo: a.url(),
         position: a.string(), // goalkeeper, defender, midfielder or attacker for player entry. gk, lcb, rcb etc. for squad entry
         statistics: a.json(), // player stats json
+        price: a.float(),
 
         //squad fields
       })
