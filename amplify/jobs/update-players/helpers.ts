@@ -56,8 +56,8 @@ export const calculatePlayerPrice = (playerInformation: PlayerInformation) => {
   const rating = ratings.length > 0 ? ratingsSum / ratings.length : null
 
   if (rating && rating > 0) {
-    return rating * 0.9
+    return rating * 1.5
   }
 
-  return 0.5
+  return 5.0
 }
