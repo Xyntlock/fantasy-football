@@ -9,11 +9,12 @@ const client = generateClient<Schema>()
 const EditSquadPage = () => {
   const onClick = async () => {
     const { userId } = await getCurrentUser()
+    await client.mutations.initSquad({ userId })
   }
 
   return (
     <Page>
-      <Button>Create Squad</Button>
+      <Button onClick={onClick}>Create Squad</Button>
     </Page>
   )
 }
