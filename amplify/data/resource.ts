@@ -33,9 +33,9 @@ const schema = a
         price: a.float(),
 
         // squad fields
-        wins: a.integer(),
-        losses: a.integer(),
-        draws: a.integer(),
+        wins: a.integer().default(0),
+        losses: a.integer().default(0),
+        draws: a.integer().default(0),
       })
       .identifier(['pk'])
       .authorization((allow) => [allow.publicApiKey()]),
