@@ -18,7 +18,23 @@ const schema = a
         name: a.string(),
 
         // squad player & player shared fields
-        position: a.string(), // Goalkeeper, Defender, Midfielder or Attacker for player entry. gk, lcb, rcb etc. for squad player entry
+        position: a.enum([
+          'Goalkeeper',
+          'Defender',
+          'Midfielder',
+          'Attacker',
+          'gk',
+          'lb',
+          'lcb',
+          'rcb',
+          'rb',
+          'lm',
+          'lcm',
+          'rcm',
+          'rm',
+          'lcf',
+          'rcf',
+        ]), // Goalkeeper, Defender, Midfielder or Attacker for player entry. gk, lcb, rcb etc. for squad player entry
 
         // player fields
         firstName: a.string(),
@@ -41,6 +57,9 @@ const schema = a
 
     initSquad: a
       .mutation()
+      .arguments({
+        userId: a.string().required(),
+      })
       .authorization((allow) => [allow.publicApiKey()])
       .returns(a.json())
       .handler(a.handler.function(initSquad)),
