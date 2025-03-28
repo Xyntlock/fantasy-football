@@ -1,6 +1,7 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend'
 import { initSquad } from '../functions/init-squad/resource'
 import { updatePlayers } from '../jobs/update-players/resource'
+import { getSquad } from '../functions/get-squad/resource'
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -24,6 +25,45 @@ export type PositionEnum =
   | 'rm'
   | 'lcf'
   | 'rcf'
+
+export type Squad = {
+  pk: string
+  name: string
+  wins: number
+  draws: number
+  losses: number
+}
+
+export type SquadPlayer = {
+  pk: string
+  position:
+    | 'gk'
+    | 'lb'
+    | 'lcb'
+    | 'rcb'
+    | 'rb'
+    | 'lm'
+    | 'lcm'
+    | 'rcm'
+    | 'rm'
+    | 'lcf'
+    | 'rcf'
+}
+
+export type Player = {
+  pk: string
+  position: 'Goalkeeper' | 'Defender' | 'Midfielder' | 'Attacker'
+  name: string
+  firstName: string
+  lastName: string
+  age: number
+  nationality: string
+  height: string
+  weight: string
+  photo: string
+  price: number
+  statistics: object
+}
 
 const schema = a
   .schema({
@@ -81,6 +121,13 @@ const schema = a
       .returns(a.json())
       .handler(a.handler.function(initSquad)),
 
+    getSquad: a
+      .query()
+      .arguments({ userId: a.string().required() })
+      .authorization((allow) => [allow.publicApiKey()])
+      .returns(a.json())
+      .handler(a.handler.function(getSquad)),
+
     updatePlayers: a
       .mutation()
       .authorization((allow) => [allow.publicApiKey()])
@@ -89,6 +136,7 @@ const schema = a
   })
   .authorization((allow) => [
     allow.resource(initSquad).to(['mutate', 'query']),
+    allow.resource(getSquad).to(['query']),
     allow.resource(updatePlayers).to(['mutate', 'query']),
   ])
 

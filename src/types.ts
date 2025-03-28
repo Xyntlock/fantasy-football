@@ -1,8 +1,14 @@
 export type Player = {
-  id: number
-  name: string
-  age: number
-  number: number | null
+  pk: string
   position: 'Goalkeeper' | 'Defender' | 'Midfielder' | 'Attacker'
+  name: string
+  firstName: string
+  lastName: string
+  age: number
+  nationality: string
+  height: string
+  weight: string
   photo: string
+  price: number
+  statistics: object
 }
