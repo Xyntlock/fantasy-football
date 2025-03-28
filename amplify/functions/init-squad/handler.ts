@@ -11,8 +11,10 @@ Amplify.configure(resourceConfig, libraryOptions)
 const client = generateClient<Schema>()
 
 export const handler: Schema['initSquad']['functionHandler'] = async (
-  userId: string
+  event
 ) => {
+  const { userId } = event.arguments
+
   try {
     await client.models.Squads.create({
       pk: `userid#${userId}-squad#1`,
