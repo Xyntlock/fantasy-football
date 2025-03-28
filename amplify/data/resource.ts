@@ -13,10 +13,15 @@ const schema = a
   .schema({
     Squads: a
       .model({
-        pk: a.string().required(), // player#playerId or userid#userId-squad#squadId-player#playerId
+        pk: a.string().required(), // player#playerId or userid#userId-squad#squadId or userid#userId-squad#squadId-player#playerId
+
+        // squad & player shared fields
+        name: a.string(),
+
+        // squad player & player shared fields
+        position: a.string(), // Goalkeeper, Defender, Midfielder or Attacker for player entry. gk, lcb, rcb etc. for squad player entry
 
         // player fields
-        name: a.string(),
         firstName: a.string(),
         lastName: a.string(),
         age: a.integer(),
@@ -24,11 +29,13 @@ const schema = a
         height: a.string(),
         weight: a.string(),
         photo: a.url(),
-        position: a.string(), // goalkeeper, defender, midfielder or attacker for player entry. gk, lcb, rcb etc. for squad entry
-        statistics: a.json(), // player stats json
+        statistics: a.json(),
         price: a.float(),
 
-        //squad fields
+        // squad fields
+        wins: a.integer().default(0),
+        losses: a.integer().default(0),
+        draws: a.integer().default(0),
       })
       .identifier(['pk'])
       .authorization((allow) => [allow.publicApiKey()]),
