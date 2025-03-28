@@ -1,5 +1,4 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend'
-import { getApi } from '../functions/get-api/resource'
 import { initSquad } from '../functions/init-squad/resource'
 import { updatePlayers } from '../jobs/update-players/resource'
 
@@ -39,12 +38,6 @@ const schema = a
       })
       .identifier(['pk'])
       .authorization((allow) => [allow.publicApiKey()]),
-
-    getApi: a
-      .query()
-      .authorization((allow) => [allow.publicApiKey()])
-      .returns(a.json())
-      .handler(a.handler.function(getApi)),
 
     initSquad: a
       .mutation()
