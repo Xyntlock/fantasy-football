@@ -8,6 +8,23 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
+export type PositionEnum =
+  | 'Goalkeeper'
+  | 'Defender'
+  | 'Midfielder'
+  | 'Attacker'
+  | 'gk'
+  | 'lb'
+  | 'lcb'
+  | 'rcb'
+  | 'rb'
+  | 'lm'
+  | 'lcm'
+  | 'rcm'
+  | 'rm'
+  | 'lcf'
+  | 'rcf'
+
 const schema = a
   .schema({
     Squads: a
