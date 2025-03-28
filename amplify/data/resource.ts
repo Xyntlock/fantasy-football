@@ -13,7 +13,7 @@ const schema = a
   .schema({
     Squads: a
       .model({
-        pk: a.string().required(), // player#playerId or userid#userId-squad#squadId-player#playerId
+        pk: a.string().required(), // player#playerId or userid#userId-squad#squadId or userid#userId-squad#squadId-player#playerId
 
         // squad & player shared fields
         name: a.string(),
@@ -29,7 +29,7 @@ const schema = a
         height: a.string(),
         weight: a.string(),
         photo: a.url(),
-        statistics: a.json(), // player stats json
+        statistics: a.json(),
         price: a.float(),
 
         // squad fields
