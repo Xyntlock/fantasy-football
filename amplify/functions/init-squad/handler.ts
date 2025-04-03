@@ -2,18 +2,13 @@ import { env } from '$amplify/env/init-squad'
 import { getAmplifyDataClientConfig } from '@aws-amplify/backend/function/runtime'
 import { Amplify } from 'aws-amplify'
 import { generateClient } from 'aws-amplify/data'
-import type { PositionEnum, Schema } from '../../data/resource'
+import type { SquadPlayer, Schema } from '../../data/resource'
 
 const { resourceConfig, libraryOptions } = await getAmplifyDataClientConfig(env)
 
 Amplify.configure(resourceConfig, libraryOptions)
 
 const client = generateClient<Schema>()
-
-type SquadPlayer = {
-  pk: string
-  position: PositionEnum
-}
 
 export const handler: Schema['initSquad']['functionHandler'] = async (
   event
@@ -23,47 +18,47 @@ export const handler: Schema['initSquad']['functionHandler'] = async (
   try {
     const players: SquadPlayer[] = [
       {
-        pk: `userid#${userId}-squad#1-player#1`,
+        pk: `userid#${userId}-squad#1-player#270510`,
         position: 'gk',
       },
       {
-        pk: `userid#${userId}-squad#1-player#2`,
+        pk: `userid#${userId}-squad#1-player#19340`,
         position: 'lb',
       },
       {
-        pk: `userid#${userId}-squad#1-player#3`,
+        pk: `userid#${userId}-squad#1-player#482888`,
         position: 'lcb',
       },
       {
-        pk: `userid#${userId}-squad#1-player#4`,
+        pk: `userid#${userId}-squad#1-player#278115`,
         position: 'rcb',
       },
       {
-        pk: `userid#${userId}-squad#1-player#5`,
+        pk: `userid#${userId}-squad#1-player#15908`,
         position: 'rb',
       },
       {
-        pk: `userid#${userId}-squad#1-player#6`,
+        pk: `userid#${userId}-squad#1-player#293163`,
         position: 'lm',
       },
       {
-        pk: `userid#${userId}-squad#1-player#7`,
+        pk: `userid#${userId}-squad#1-player#357060`,
         position: 'lcm',
       },
       {
-        pk: `userid#${userId}-squad#1-player#8`,
+        pk: `userid#${userId}-squad#1-player#149564`,
         position: 'rcm',
       },
       {
-        pk: `userid#${userId}-squad#1-player#9`,
+        pk: `userid#${userId}-squad#1-player#136723`,
         position: 'rm',
       },
       {
-        pk: `userid#${userId}-squad#1-player#10`,
+        pk: `userid#${userId}-squad#1-player#195717`,
         position: 'lcf',
       },
       {
-        pk: `userid#${userId}-squad#1-player#11`,
+        pk: `userid#${userId}-squad#1-player#158696`,
         position: 'rcf',
       },
     ]

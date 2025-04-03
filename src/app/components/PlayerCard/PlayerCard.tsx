@@ -1,17 +1,17 @@
 import { Card } from 'flowbite-react'
 import type { ComponentProps } from 'react'
-import type { Player } from '../../../types'
 import type * as Styled from './PlayerCard.styles'
+import type { Player } from '../../../../amplify/data/resource'
 
 type PlayerCardProps = {
-  player: Player
+  player: Player | null
   width: Exclude<Styled.PlayerCardVariants['width'], null>
   height: Exclude<Styled.PlayerCardVariants['height'], null>
 } & ComponentProps<typeof Card>
 
 type CoreInfoProps = {
-  name: string
-  position: string
+  name?: string
+  position?: string
 }
 
 const CoreInfoContainer = ({ name, position }: CoreInfoProps) => {
@@ -24,8 +24,8 @@ const CoreInfoContainer = ({ name, position }: CoreInfoProps) => {
 }
 
 type StatsContainerProps = {
-  age: number
-  number: number | null
+  age?: number
+  number?: number | null
 }
 
 const StatsContainer = ({ age, number }: StatsContainerProps) => {
@@ -46,12 +46,12 @@ export const PlayerCard = ({
   return (
     <Card className="w-60 flex items-center flex-col">
       <img
-        src={player.photo}
-        alt={player.name}
+        src={player?.photo}
+        alt={player?.name}
         className="h-24 w-24 rounded-full self-center"
       />
-      <CoreInfoContainer name={player.name} position={player.position} />
-      <StatsContainer age={player.age} number={player.number} />
+      <CoreInfoContainer name={player?.name} position={player?.position} />
+      <StatsContainer age={player?.age} number={1} />
     </Card>
   )
 }

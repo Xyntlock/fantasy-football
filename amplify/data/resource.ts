@@ -3,17 +3,9 @@ import { initSquad } from '../functions/init-squad/resource'
 import { updatePlayers } from '../jobs/update-players/resource'
 import { getSquad } from '../functions/get-squad/resource'
 
-/*== STEP 1 ===============================================================
-The section below creates a Todo database table with a "content" field. Try
-adding a new "isDone" field as a boolean. The authorization rule below
-specifies that any user authenticated via an API key can "create", "read",
-"update", and "delete" any "Todo" records.
-=========================================================================*/
-export type PositionEnum =
-  | 'Goalkeeper'
-  | 'Defender'
-  | 'Midfielder'
-  | 'Attacker'
+export type PositionEnum = 'Goalkeeper' | 'Defender' | 'Midfielder' | 'Attacker'
+
+export type ShorthandPositionEnum =
   | 'gk'
   | 'lb'
   | 'lcb'
@@ -26,6 +18,8 @@ export type PositionEnum =
   | 'lcf'
   | 'rcf'
 
+export type Position = PositionEnum | ShorthandPositionEnum
+
 export type Squad = {
   pk: string
   name: string
@@ -36,23 +30,12 @@ export type Squad = {
 
 export type SquadPlayer = {
   pk: string
-  position:
-    | 'gk'
-    | 'lb'
-    | 'lcb'
-    | 'rcb'
-    | 'rb'
-    | 'lm'
-    | 'lcm'
-    | 'rcm'
-    | 'rm'
-    | 'lcf'
-    | 'rcf'
+  position: ShorthandPositionEnum
 }
 
 export type Player = {
   pk: string
-  position: 'Goalkeeper' | 'Defender' | 'Midfielder' | 'Attacker'
+  position: Position
   name: string
   firstName: string
   lastName: string

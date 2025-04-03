@@ -13,27 +13,8 @@ const client = generateClient<Schema>()
 export const handler: Schema['getSquad']['functionHandler'] = async (event) => {
   const { userId } = event.arguments
 
-  console.log('user id', userId)
-
-  const promises = []
-
-  promises.push(client.models.Squads.get({ pk: `userid#${userId}-squad#1` }))
-  promises.push(
-    client.models.Squads.list({
-      filter: {
-        pk: {
-          contains: `userid#${userId}-squad#1-player#`,
-        },
-      },
-    })
-  )
-
-  const res = await client.models.Squads.list({
-    filter: {
-      pk: {
-        contains: `userid#${userId}-squad#1-player#`,
-      },
-    },
+  const squad = await client.models.Squads.get({
+    pk: `userid#${userId}-squad#1`,
   })
 
   const squadPlayers: SquadPlayer[] = []
@@ -64,12 +45,6 @@ export const handler: Schema['getSquad']['functionHandler'] = async (event) => {
     nextToken = res.nextToken
   } while (squadPlayers.length < 11 && nextToken)
 
-  const [squad] = await Promise.all(promises)
-
-  console.log('squad', squad)
-
-  console.log('squadPlayers', squadPlayers)
-
   const players = (
     await Promise.all(
       squadPlayers.map((player) => {
@@ -81,13 +56,30 @@ export const handler: Schema['getSquad']['functionHandler'] = async (event) => {
       })
     )
   ).map((player) => {
-    return player.data
+    const squadPlayer = squadPlayers.find((squadPlayerItem) => {
+      const squadPlayerId = squadPlayerItem.pk.split('player#')[1]
+      return player.data?.pk === `player#${squadPlayerId}`
+    })
+
+    return { ...player.data, position: squadPlayer?.position }
   })
 
-  console.log('players', players)
+  const playerSquad = {
+    gk: players.find((player) => player.position === 'gk'),
+    lb: players.find((player) => player.position === 'lb'),
+    lcb: players.find((player) => player.position === 'lcb'),
+    rcb: players.find((player) => player.position === 'rcb'),
+    rb: players.find((player) => player.position === 'rb'),
+    lm: players.find((player) => player.position === 'lm'),
+    lcm: players.find((player) => player.position === 'lcm'),
+    rcm: players.find((player) => player.position === 'rcm'),
+    rm: players.find((player) => player.position === 'rm'),
+    lcf: players.find((player) => player.position === 'lcf'),
+    rcf: players.find((player) => player.position === 'rcf'),
+  }
 
   return {
     squad: squad.data as Squad,
-    squadPlayers: players as Player[],
+    squadPlayers: playerSquad,
   }
 }
