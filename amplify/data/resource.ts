@@ -1,14 +1,53 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend'
-import { getApi } from '../functions/get-api/resource'
 import { initSquad } from '../functions/init-squad/resource'
 import { updatePlayers } from '../jobs/update-players/resource'
+import { getSquad } from '../functions/get-squad/resource'
 
-/*== STEP 1 ===============================================================
-The section below creates a Todo database table with a "content" field. Try
-adding a new "isDone" field as a boolean. The authorization rule below
-specifies that any user authenticated via an API key can "create", "read",
-"update", and "delete" any "Todo" records.
-=========================================================================*/
+export type PositionEnum = 'Goalkeeper' | 'Defender' | 'Midfielder' | 'Attacker'
+
+export type ShorthandPositionEnum =
+  | 'gk'
+  | 'lb'
+  | 'lcb'
+  | 'rcb'
+  | 'rb'
+  | 'lm'
+  | 'lcm'
+  | 'rcm'
+  | 'rm'
+  | 'lcf'
+  | 'rcf'
+
+export type Position = PositionEnum | ShorthandPositionEnum
+
+export type Squad = {
+  pk: string
+  name: string
+  wins: number
+  draws: number
+  losses: number
+}
+
+export type SquadPlayer = {
+  pk: string
+  position: ShorthandPositionEnum
+}
+
+export type Player = {
+  pk: string
+  position: Position
+  name: string
+  firstName: string
+  lastName: string
+  age: number
+  nationality: string
+  height: string
+  weight: string
+  photo: string
+  price: number
+  statistics: object
+}
+
 const schema = a
   .schema({
     Squads: a
@@ -19,7 +58,23 @@ const schema = a
         name: a.string(),
 
         // squad player & player shared fields
-        position: a.string(), // Goalkeeper, Defender, Midfielder or Attacker for player entry. gk, lcb, rcb etc. for squad player entry
+        position: a.enum([
+          'Goalkeeper',
+          'Defender',
+          'Midfielder',
+          'Attacker',
+          'gk',
+          'lb',
+          'lcb',
+          'rcb',
+          'rb',
+          'lm',
+          'lcm',
+          'rcm',
+          'rm',
+          'lcf',
+          'rcf',
+        ]), // Goalkeeper, Defender, Midfielder or Attacker for player entry. gk, lcb, rcb etc. for squad player entry
 
         // player fields
         firstName: a.string(),
@@ -40,17 +95,21 @@ const schema = a
       .identifier(['pk'])
       .authorization((allow) => [allow.publicApiKey()]),
 
-    getApi: a
-      .query()
-      .authorization((allow) => [allow.publicApiKey()])
-      .returns(a.json())
-      .handler(a.handler.function(getApi)),
-
     initSquad: a
       .mutation()
+      .arguments({
+        userId: a.string().required(),
+      })
       .authorization((allow) => [allow.publicApiKey()])
       .returns(a.json())
       .handler(a.handler.function(initSquad)),
+
+    getSquad: a
+      .query()
+      .arguments({ userId: a.string().required() })
+      .authorization((allow) => [allow.publicApiKey()])
+      .returns(a.json())
+      .handler(a.handler.function(getSquad)),
 
     updatePlayers: a
       .mutation()
@@ -60,6 +119,7 @@ const schema = a
   })
   .authorization((allow) => [
     allow.resource(initSquad).to(['mutate', 'query']),
+    allow.resource(getSquad).to(['query']),
     allow.resource(updatePlayers).to(['mutate', 'query']),
   ])
 
