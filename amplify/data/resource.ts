@@ -93,6 +93,7 @@ const schema = a
         draws: a.integer().default(0),
       })
       .identifier(['pk'])
+      .secondaryIndexes((index) => [index('position')])
       .authorization((allow) => [allow.publicApiKey()]),
 
     initSquad: a
