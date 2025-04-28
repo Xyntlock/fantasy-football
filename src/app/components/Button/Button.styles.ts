@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge'
 
 const buttonVariants = cva(['flex', 'flex-wrap', 'gap-2'], {
   variants: {
+    // used to set the 'size' value of the Flowbite Button component
     size: {
       xs: [],
       sm: [],
