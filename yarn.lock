@@ -117,6 +117,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@aws-amplify/api-graphql@npm:^4.7.15":
+  version: 4.7.15
+  resolution: "@aws-amplify/api-graphql@npm:4.7.15"
+  dependencies:
+    "@aws-amplify/api-rest": "npm:4.1.4"
+    "@aws-amplify/core": "npm:6.11.4"
+    "@aws-amplify/data-schema": "npm:^1.7.0"
+    "@aws-sdk/types": "npm:3.387.0"
+    graphql: "npm:15.8.0"
+    rxjs: "npm:^7.8.1"
+    tslib: "npm:^2.5.0"
+    uuid: "npm:^9.0.0"
+  checksum: 10c0/34d42e9022bf48a55ff88805b827f9d78208bf7c97567e139d6cbe4c3addf957c7a180c42d1919e9e2d019a770d9e296d2fa5a80240affaac6f9934801c95eca
+  languageName: node
+  linkType: hard
+
 "@aws-amplify/api-rest@npm:4.0.59":
   version: 4.0.59
   resolution: "@aws-amplify/api-rest@npm:4.0.59"
@@ -125,6 +141,17 @@ __metadata:
   peerDependencies:
     "@aws-amplify/core": ^6.1.0
   checksum: 10c0/735778f90f0a3599e2002a9ee617a54c7edb88b3eed421047527f82c772deddf2e4105e1d12953b0c105781bee056cab61bf4cea9440ee815c14b63ebc4a2bcf
+  languageName: node
+  linkType: hard
+
+"@aws-amplify/api-rest@npm:4.1.4":
+  version: 4.1.4
+  resolution: "@aws-amplify/api-rest@npm:4.1.4"
+  dependencies:
+    tslib: "npm:^2.5.0"
+  peerDependencies:
+    "@aws-amplify/core": ^6.1.0
+  checksum: 10c0/5c281f8d6a3f835697cd6aff1ca20b93cf633fcb845d1ec747140a1a63c234b90f4d329bd1fb1721b99469f1dcbe6ae16c7644ff0cb515cda90cb91c40baa4cc
   languageName: node
   linkType: hard
 
@@ -413,6 +440,22 @@ __metadata:
     change-case: "npm:^4.1.2"
     yup: "npm:^0.32.11"
   checksum: 10c0/c5089d735bb1cbd0bdf3d1bdfbe0d8702d40c7780b485ff922a4c14194b9706a7d12571114e9c244f6d7880876337f25d61ad16ab865c31b08c875ba8e98a860
+  languageName: node
+  linkType: hard
+
+"@aws-amplify/core@npm:6.11.4":
+  version: 6.11.4
+  resolution: "@aws-amplify/core@npm:6.11.4"
+  dependencies:
+    "@aws-crypto/sha256-js": "npm:5.2.0"
+    "@aws-sdk/types": "npm:3.398.0"
+    "@smithy/util-hex-encoding": "npm:2.0.0"
+    "@types/uuid": "npm:^9.0.0"
+    js-cookie: "npm:^3.0.5"
+    rxjs: "npm:^7.8.1"
+    tslib: "npm:^2.5.0"
+    uuid: "npm:^9.0.0"
+  checksum: 10c0/87042b2bb4dbe5dd6fb4506ba3383ff37f9ed6ab2280745523575c1be74b180aad145daa3014848ccd042e92cffb99cadf9ccaeaeb421b69282accc462d777a4
   languageName: node
   linkType: hard
 
@@ -7344,6 +7387,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "amplify-vite-react-template@workspace:."
   dependencies:
+    "@aws-amplify/api-graphql": "npm:^4.7.15"
     "@aws-amplify/backend": "npm:^1.5.0"
     "@aws-amplify/backend-cli": "npm:^1.2.9"
     "@aws-amplify/core": "npm:^6.6.0"
