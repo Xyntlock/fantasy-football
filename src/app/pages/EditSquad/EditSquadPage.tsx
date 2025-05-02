@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { Paginator } from './Paginator'
 import type { GetSquadResponse, Squad } from '../../../types'
 import { PlayerCards } from './PlayerCards'
+import type { V6Client } from '@aws-amplify/api-graphql'
 
 const client = generateClient<Schema>()
 
@@ -33,7 +34,7 @@ const EditSquadPage = () => {
     <Page>
       <PlayerCards squad={players} />
       <Button onClick={() => setPosition('Goalkeeper')}>Goalkeepers</Button>
-      <Paginator position={position} client={client} />
+      <Paginator position={position} client={client as V6Client<Schema>} />
       <Button onClick={onClick}>Create Squad</Button>
     </Page>
   )
