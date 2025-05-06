@@ -1,11 +1,13 @@
+import type { PositionEnum } from '../../../../amplify/data/resource'
 import type { Squad } from '../../../types'
 import { PlayerCard } from '../../components/PlayerCard/PlayerCard'
 
 type PlayerCardProps = {
   squad: Squad | null
+  onClick: (position: PositionEnum) => void
 }
 
-export const PlayerCards = ({ squad }: PlayerCardProps) => {
+export const PlayerCards = ({ squad, onClick }: PlayerCardProps) => {
   if (!squad) {
     return <div>Loading...</div>
   }
@@ -14,45 +16,45 @@ export const PlayerCards = ({ squad }: PlayerCardProps) => {
       <div className="grid grid-rows-3 gap-4">
         <div className="grid grid-cols-4 justify-self-center gap-36">
           <div className="col-start-2">
-            <button type="button" onClick={() => console.log('lcf')}>
+            <button type="button" onClick={() => onClick('Attacker')}>
               <PlayerCard player={squad.lcf} width="m" height="m" />
             </button>
           </div>
-          <button type="button" onClick={() => console.log('rcf')}>
+          <button type="button" onClick={() => onClick('Attacker')}>
             <PlayerCard player={squad.rcf} width="m" height="m" />
           </button>
         </div>
         <div className="grid grid-cols-4 justify-self-center gap-36">
-          <button type="button" onClick={() => console.log('lm')}>
+          <button type="button" onClick={() => onClick('Midfielder')}>
             <PlayerCard player={squad.lm} width="m" height="m" />
           </button>
-          <button type="button" onClick={() => console.log('lcm')}>
+          <button type="button" onClick={() => onClick('Midfielder')}>
             <PlayerCard player={squad.lcm} width="m" height="m" />
           </button>
-          <button type="button" onClick={() => console.log('rcm')}>
+          <button type="button" onClick={() => onClick('Midfielder')}>
             <PlayerCard player={squad.rcm} width="m" height="m" />
           </button>
-          <button type="button" onClick={() => console.log('rm')}>
+          <button type="button" onClick={() => onClick('Midfielder')}>
             <PlayerCard player={squad.rm} width="m" height="m" />
           </button>
         </div>
         <div className="grid grid-cols-4 justify-self-center gap-36">
-          <button type="button" onClick={() => console.log('lb')}>
+          <button type="button" onClick={() => onClick('Defender')}>
             <PlayerCard player={squad.lb} width="m" height="m" />
           </button>
-          <button type="button" onClick={() => console.log('lcb')}>
+          <button type="button" onClick={() => onClick('Defender')}>
             <PlayerCard player={squad.lcb} width="m" height="m" />
           </button>
-          <button type="button" onClick={() => console.log('rcb')}>
+          <button type="button" onClick={() => onClick('Defender')}>
             <PlayerCard player={squad.rcb} width="m" height="m" />
           </button>
-          <button type="button" onClick={() => console.log('rb')}>
+          <button type="button" onClick={() => onClick('Defender')}>
             <PlayerCard player={squad.rb} width="m" height="m" />
           </button>
         </div>
       </div>
       <div className="flex items-center justify-center mt-4">
-        <button type="button" onClick={() => console.log('gk')}>
+        <button type="button" onClick={() => onClick('Goalkeeper')}>
           <PlayerCard player={squad.gk} width="m" height="m" />
         </button>
       </div>

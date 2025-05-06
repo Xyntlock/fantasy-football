@@ -30,11 +30,22 @@ const EditSquadPage = () => {
     await client.mutations.initSquad({ userId })
   }
 
+  const handleOnCardClick = (position: PositionEnum) => {
+    setPosition(position)
+  }
+
+  if (position) {
+    return (
+      <Page>
+        <Paginator position={position} client={client as V6Client<Schema>} />
+        <Button onClick={() => setPosition(null)}>Back to Squad</Button>
+      </Page>
+    )
+  }
+
   return (
     <Page>
-      <PlayerCards squad={players} />
-      <Button onClick={() => setPosition('Goalkeeper')}>Goalkeepers</Button>
-      <Paginator position={position} client={client as V6Client<Schema>} />
+      <PlayerCards squad={players} onClick={handleOnCardClick} />
       <Button onClick={onClick}>Create Squad</Button>
     </Page>
   )

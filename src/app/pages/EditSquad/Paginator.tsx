@@ -6,6 +6,7 @@ import type {
 } from '../../../../amplify/data/resource'
 import { Pagination } from 'flowbite-react'
 import type { V6Client } from '@aws-amplify/api-graphql'
+import { PlayerCard } from '../../components/PlayerCard/PlayerCard'
 
 type PaginatorProps = {
   position: PositionEnum | null
@@ -28,6 +29,7 @@ export const Paginator = ({ position, client }: PaginatorProps) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [players] = useState<Player[]>([])
   const [maxPage, setMaxPage] = useState(0)
+  const [shortlist, setShortlist] = useState<Player[]>([])
 
   useEffect(() => {
     if (position) {
@@ -41,8 +43,6 @@ export const Paginator = ({ position, client }: PaginatorProps) => {
     }
 
     if (pageNumber <= maxPage) {
-      const shortlist = getPageList({ pageNumber, list: players })
-      console.log(shortlist)
     } else {
       const res = await client.models.Squads.listSquadsByPosition(
         { position },
@@ -54,6 +54,9 @@ export const Paginator = ({ position, client }: PaginatorProps) => {
       players.push(...(res.data as Player[]))
     }
 
+    const shortlist = getPageList({ pageNumber, list: players })
+    setShortlist(shortlist)
+
     setCurrentPage(pageNumber)
   }
 
@@ -62,11 +65,16 @@ export const Paginator = ({ position, client }: PaginatorProps) => {
   }
 
   return (
-    <Pagination
-      currentPage={currentPage}
-      onPageChange={onPageChange}
-      layout="navigation"
-      totalPages={100}
-    />
+    <>
+      <Pagination
+        currentPage={currentPage}
+        onPageChange={onPageChange}
+        layout="navigation"
+        totalPages={100}
+      />
+      {shortlist.map((player) => (
+        <PlayerCard key={player.pk} player={player} height="m" width="m" />
+      ))}
+    </>
   )
 }
