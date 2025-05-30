@@ -1,7 +1,11 @@
 import { Card } from 'flowbite-react'
 import type { ComponentProps } from 'react'
 import type * as Styled from './PlayerCard.styles'
-import type { Player } from '../../../../amplify/data/resource'
+import type {
+  Player,
+  PositionEnum,
+  ShorthandPositionEnum,
+} from '../../../../amplify/data/resource'
 
 type PlayerCardProps = {
   player: Player | null
@@ -10,29 +14,51 @@ type PlayerCardProps = {
 } & ComponentProps<typeof Card>
 
 type CoreInfoProps = {
-  name?: string
-  position?: string
+  name: string
+  position: ShorthandPositionEnum
+}
+
+const convertPositionToString = (
+  position: ShorthandPositionEnum
+): PositionEnum => {
+  switch (position) {
+    case 'gk':
+      return 'Goalkeeper'
+    case 'lb':
+    case 'lcb':
+    case 'rcb':
+    case 'rb':
+      return 'Defender'
+    case 'lcm':
+    case 'lm':
+    case 'rcm':
+    case 'rm':
+      return 'Midfielder'
+    case 'lcf':
+    case 'rcf':
+      return 'Attacker'
+  }
 }
 
 const CoreInfoContainer = ({ name, position }: CoreInfoProps) => {
   return (
     <div className="flex items-center flex-col">
       <div>{name}</div>
-      <div>{position}</div>
+      <div>{convertPositionToString(position)}</div>
     </div>
   )
 }
 
 type StatsContainerProps = {
-  age?: number
-  number?: number | null
+  player: Player
 }
 
-const StatsContainer = ({ age, number }: StatsContainerProps) => {
+const StatsContainer = ({ player: { age, price } }: StatsContainerProps) => {
   return (
     <div className="grid grid-cols-2">
       <div>Age: {age}</div>
-      <div>Number: {number || 0}</div>
+      <div>Number: 1</div>
+      <div>Price: £{Number(price).toFixed(2)}m</div>
     </div>
   )
 }
@@ -50,8 +76,15 @@ export const PlayerCard = ({
         alt={player?.name}
         className="h-24 w-24 rounded-full self-center"
       />
-      <CoreInfoContainer name={player?.name} position={player?.position} />
-      <StatsContainer age={player?.age} number={1} />
+      {player && (
+        <>
+          <CoreInfoContainer
+            name={player?.name}
+            position={player?.position as ShorthandPositionEnum}
+          />
+          <StatsContainer player={player} />
+        </>
+      )}
     </Card>
   )
 }
